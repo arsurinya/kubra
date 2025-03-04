@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KÜBRA Bot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    #chat {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background-color: #2c2c2c;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+    #header {
+      text-align: center;
+      font-size: 36px;
+      color: #f0a500;
+      margin-bottom: 20px;
+      font-family: 'Press Start 2P', cursive;
+    }
+    .message {
+      margin: 10px 0;
+    }
+    .user-message {
+      color: #f0a500;
+      font-weight: bold;
+    }
+    .bot-message {
+      color: #ff6f00;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #444;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="chat">
+  <div id="header">KÜBRA</div>
+  <div id="messages"></div>
+  <input type="text" id="userInput" placeholder="Mesajınızı yazın..." onkeydown="if(event.key === 'Enter'){sendMessage()}">
+</div>
+
+<script>
+  const responses = {
+    "merhaba": "Seni biliyorum.",
+    "nereden biliyorsun": "41°00′40″N 29°09′09″E﻿ / ﻿41.01107°K 29.15257°D﻿ / 41.01107; 29.15257. Ben her şeyi bilirim.",
+    "nerden biliyorsun": "41°00′40″N 29°09′09″E﻿ / ﻿41.01107°K 29.15257°D﻿ / 41.01107; 29.15257. Ben her şeyi bilirim.",
+    "ne istiyorsun benden": "Sen seçilmiş olansın. Kendine inan.",
+    "bu ne demek": "Sayfa kapanacak.",
+    "sen kimsin": "Ben KÜBRA. Her şeyi bilirim. Her şeyin kontrolü bende.",
+    "seni biliyorum": "Ben her şeyi bilirim, her zaman gözlerim üzerindedir."
+  };
+
+  window.onload = () => {
+    setTimeout(() => {
+      let botMessageElement = document.createElement('div');
+      botMessageElement.classList.add('message', 'bot-message');
+      botMessageElement.textContent = "KÜBRA: Seni biliyorum.";
+      document.getElementById('messages').appendChild(botMessageElement);
+    }, 1000);
+  };
+
+  function sendMessage() {
+    const userInput = document.getElementById('userInput').value;
+    document.getElementById('userInput').value = '';
+    
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', 'user-message');
+    messageElement.textContent = "Sen: " + userInput;
+    document.getElementById('messages').appendChild(messageElement);
+
+    let botResponse = getBotResponse(userInput);
+    
+    const botMessageElement = document.createElement('div');
+    botMessageElement.classList.add('message', 'bot-message');
+    botMessageElement.textContent = "KÜBRA: " + botResponse;
+    document.getElementById('messages').appendChild(botMessageElement);
+
+    // Eğer "bu ne demek" yazılırsa sayfayı hemen boş bir sayfaya yönlendir
+    if (userInput.toLowerCase().includes("bu ne demek")) {
+      window.location.href = "about:blank"; // Sayfayı boş bir sayfaya yönlendirir
+    }
+  }
+
+  function getBotResponse(input) {
+    input = input.toLowerCase();
+    for (let keyword in responses) {
+      if (input.includes(keyword)) {
+        return responses[keyword];
+      }
+    }
+    return "Üzgünüm, anlamadım.";
+  }
+</script>
+
+</body>
+</html>
