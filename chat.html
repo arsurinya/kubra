@@ -64,7 +64,7 @@
     "nereden biliyorsun": "41°00′40″N 29°09′09″E﻿ / ﻿41.01107°K 29.15257°D﻿ / 41.01107; 29.15257. Ben her şeyi bilirim.",
     "nerden biliyorsun": "41°00′40″N 29°09′09″E﻿ / ﻿41.01107°K 29.15257°D﻿ / 41.01107; 29.15257. Ben her şeyi bilirim.",
     "ne istiyorsun benden": "Sen seçilmiş olansın. Kendine inan.",
-    "bu ne demek": "Sayfa kapanacak.",
+    "bu ne demek": "GÖRECEKSİN",
     "sen kimsin": "Ben KÜBRA. Her şeyi bilirim. Her şeyin kontrolü bende.",
     "seni biliyorum": "Ben her şeyi bilirim, her zaman gözlerim üzerindedir."
   };
@@ -96,7 +96,9 @@
 
     // Eğer "bu ne demek" yazılırsa sayfayı hemen boş bir sayfaya yönlendir
     if (userInput.toLowerCase().includes("bu ne demek")) {
-      window.location.href = "about:blank"; // Sayfayı boş bir sayfaya yönlendirir
+      setTimeout(() => {
+        window.location.href = "about:blank"; // Sayfayı boş bir sayfaya yönlendirir
+      }, 500);  // Yarım saniye bekleyerek sayfayı yönlendirme
     }
   }
 
